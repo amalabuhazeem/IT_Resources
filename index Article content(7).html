@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Article Content (7)</title>
+    <style>
+        body {
+            background-color: #6C3EB7;
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            margin: 30px;
+            width: 200px;
+            text-align: center;
+        }
+
+        img {
+            width: 200px; /* Adjust size as needed */
+            height: 200px; /* Ensure height is equal to width for a perfect circle */
+            border-radius: 50%; /* Makes the image circular */
+            border: 5px solid #FFF; /* Adds a colored border around the image */
+            margin-bottom: 10px;
+            object-fit: cover; /* Ensures the image covers the area without distortion */
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #FFF;
+        }
+
+        button {
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: black;
+            width: 200px;
+            height: 50px;
+            margin-top: 10px;
+        }
+
+        .comments {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: white;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .comments span {
+            font-size: 20px;
+            margin-left: 5px;
+        }
+
+        .back {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .back a {
+            text-decoration: none;
+            color: black;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .web {
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 15px;
+            width: 150px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .web span {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        #image-chat {
+            position: absolute;
+            top: 650px;
+            right: 10%;
+            width: 100px;
+            height: 100px;
+        }
+
+        #com {
+            color: black;
+            background-color: #FFF;
+            width: 150px;
+            height: 50px;
+            position: absolute;
+            top: 650px;
+            left: 250px;
+            font-size: 20px;
+            font-family: 'Comic Sans MS', sans-serif;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #com a {
+            color: black;
+            text-decoration: none;
+            display: block;
+            height: 100%;
+            width: 100%;
+            line-height: 30px; /* Center text vertically */
+        }
+    </style>
+    <script>
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <img src="image/bok.jpg" alt="Slides">
+            <h2>Slides</h2>
+        </div>
+        <div class="card">
+            <img src="image/f323e7e5-5417-4764-9b48-002433cb8ced-lg.jpg" alt="Summary">
+            <h2>Summary</h2>
+            <button onclick="navigateTo('Slide page7.html')">Visit</button>
+        </div>
+        <div class="card">
+            <img src="image/questions.jpg" alt="Questions">
+            <h2>Questions</h2>
+        </div>
+        <div class="card">
+            <img src="image/res.png" alt="Resources">
+            <h2>Resources</h2>
+            <button onclick="navigateTo('References7.html')">Visit Resources</button>
+        </div>
+    </div>
+
+    <div class="comments">
+        <span>
+            <img id="image-chat" src="image/CHAT.png" alt="Chat">
+            <a href="Chat.html">Start a chat...</a>
+        </span>
+    </div>
+    <div class="back">
+        <a href="Material Page.html">Back</a>
+    </div>
+    <div class="web">
+        <span>LAB OBJECT</span>
+    </div>
+    <button id="com" onclick="window.location.href='comment.html'">Comment...</button>
+</body>
+</html>

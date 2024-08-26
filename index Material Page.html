@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Material page</title>
+    <style>
+        body {
+            background-color: #6C3EB7;
+        }
+        .background-box {
+            background-color: #000;
+            color: white;
+            border: 2px solid #333;
+            position: absolute;
+            top: 0px;
+            right: 625px;
+            width: 250px;
+            font-size: 50px;
+            text-align: center;
+        }
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+        #image-book {
+            position: absolute;
+            top: 150px;
+            left: 0px;
+            width: 550px;
+            height: 450px;
+            border: 2px solid #6C3EB7;
+        }
+        #note {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 75px;
+            height: 50px;
+            border: 2px solid #6C3EB7;
+            font-size: 25px;
+        }
+        #table {
+            position: absolute;
+            top: 75px;
+            right: 10px;
+        }
+        #bot {
+            color: white;
+            background-color: #000;
+            width: 100px;
+            height: 50px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #com {
+            color: black;
+            width: 150px;
+            height: 50px;
+            position: absolute;
+            top: 650px;
+            left: 250px;
+            font-size: 20px;
+            font-family: 'Comic Sans MS';
+        }
+        #image-chat {
+            position: absolute;
+            top: 625px;
+            left: 0px;
+            width: 100px;
+            height: 100px;
+            border: 2px solid #6C3EB7;
+        }
+        #Start {
+            position: absolute;
+            top: 680px;
+            left: 110px;
+            width: 100px;
+            height: 100px;
+            border: 2px solid #6C3EB7;
+            background-color: #6C3EB7;
+        }
+        #close {
+            position: absolute;
+            top: 650px;
+            right: 75px;
+            width: 100px;
+            height: 50px;
+            font-size: 20px;
+            font-family: 'Arial Black';
+        }
+        #searchInput {
+            width: 200px;
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="background-box"><i>Material</i></h1>
+    
+    <input type="text" id="searchInput" placeholder="Enter text to search...">
+    <button onclick="searchText()">Search</button>
+
+    <script>
+        function searchText() {
+            const input = document.getElementById('searchInput').value;
+            const content = document.getElementById('content');
+            const regex = new RegExp(`(${input})`, 'gi');
+
+            if (content) {
+                content.innerHTML = content.innerHTML.replace(/<span class="highlight">|<\/span>/g, '');
+
+                if (input.trim() !== '') {
+                    content.innerHTML = content.innerHTML.replace(regex, '<span class="highlight">$1</span>');
+                }
+            }
+        }
+
+        function redirectTo(url) {
+            window.location.href = url;
+        }
+    </script>
+
+    <img id="image-book" src="image/bookIT.png">
+    <button id="note" onclick="redirectTo('Note.html')">Note</button>
+    
+    <table width="50%" height="85%" align="right" id="table">
+        <tr>
+            <td><button id="bot" onclick="redirectTo('Article content.html')">WEB</button></td>
+            <td><button id="bot" onclick="redirectTo('Article content(2).html')">JAVA</button></td>
+        </tr>
+        <tr>
+            <td><button id="bot" onclick="redirectTo('Article content(3).html')">OBJECT</button></td>
+            <td><button id="bot" onclick="redirectTo('Article content(4).html')">DATABASE</button></td>
+        </tr>
+        <tr>
+            <td><button id="bot" onclick="redirectTo('Article content(5).html')">ANDROID</button></td>
+            <td><button id="bot" onclick="redirectTo('Article content(6).html')">TOOLS</button></td>
+        </tr>
+        <tr>
+            <td><button id="bot" onclick="redirectTo('Article content(7).html')">LAB OBJECT</button></td>
+            <td><button id="bot" onclick="redirectTo('Article content(8).html')">LAB WEB</button></td>
+        </tr>
+    </table>
+    <button id="com" onclick="redirectTo('comment.html')">Comment...</button>
+    <img id="image-chat" src="image/CHAT.png">
+    <button id="Start" onclick="redirectTo('Chat.html')">Start a chat..</button>
+    <button id="close" onclick="redirectTo('Logout Page.html')">CLOSE</button>
+
+    <!-- Ensure to add an element with id="content" where you want to perform the search -->
+    <div id="content">
+        <!-- Content to be searched -->
+    </div>
+</body>
+</html>

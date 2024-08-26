@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Content Admin Dashboard4</title>
+    <style>
+        body {
+            background-color: #3E5C76;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            margin-top: 100px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            width: 220px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 5px solid #FFF;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            margin: 10px 0;
+            color: #FFF;
+        }
+
+        button {
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #444;
+            transform: scale(1.05);
+        }
+
+        button a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .comments, .back, .web, .admin-tools {
+            position: fixed;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .comments {
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .comments img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .back {
+            top: 20px;
+            left: 20px;
+            text-align: center;
+        }
+
+        .back a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .web {
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        .web span {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .admin-tools {
+            top: 20px;
+            right: 20px;
+            text-align: center;
+        }
+
+        .admin-tools span {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .admin-tools button {
+            display: block;
+            margin: 10px auto;
+            width: 150px;
+            height: 40px;
+            background-color: #555;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .admin-tools button:hover {
+            background-color: #333;
+        }
+
+        .admin-tools a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .manage-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            width: 200px;
+            height: 100px;
+            position: absolute;
+            top: 50%;
+            left: 40%;
+        }
+
+        .manage-buttons a {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <img src="image/bok.jpg" alt="Books">
+            <h2>Slides</h2>
+        </div>
+        <div class="card">
+            <img src="image/f323e7e5-5417-4764-9b48-002433cb8ced-lg.jpg" alt="Slides">
+            <h2>Summarys</h2>
+        </div>
+        <div class="card">
+            <img src="image/questions.jpg" alt="Questions">
+            <h2>Questions</h2>
+        </div>
+        <div class="card">
+            <img src="image/res.png" alt="Resources">
+            <h2>Resources</h2>
+        </div>
+    </div>
+
+    <div class="manage-buttons">
+        <button><a href="Admin Slide Page4.html">Manage Material</a></button>
+        <button><a href="Admin References4.html">Manage Resources</a></button>
+    </div>
+
+    <div class="admin-tools">
+        <span>Admin Tools</span>
+        <button><a href="Site Settings.html">Settings</a></button>
+        <button><a href="Reports.html">Reports</a></button>
+        <button><a href="User Management.html">Users</a></button>
+    </div>
+    
+    <div class="comments">
+        <img src="image/CHAT.png" alt="Chat">
+        <a href="Admin Chat.html">Start a chat...</a>
+    </div>
+    
+    <div class="back">
+        <a href="Material Page Admin.html">Home</a>
+    </div>
+    
+    <div class="web">
+        <span>DATABASE</span>
+    </div>
+
+</body>
+</html>

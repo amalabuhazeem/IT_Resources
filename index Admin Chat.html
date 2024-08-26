@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Chat</title>
+    <style>
+        body {
+            background-color: #3E5C76; /* لون الخلفية الأصلي */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .message-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            color: #333;
+            max-height: 500px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .message:hover {
+            background-color: #f5f5f5;
+        }
+
+        .message:last-child {
+            border-bottom: none;
+        }
+
+        .message p {
+            margin: 0;
+        }
+
+        .reply-form {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .reply-form textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            resize: none;
+            box-sizing: border-box;
+        }
+
+        .reply-form button {
+            width: 100%;
+            margin-top: 10px;
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .reply-form button:hover {
+            background-color: #333;
+        }
+
+        .back-button {
+            display: block;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .back-button a {
+            color: #000;
+            text-decoration: none;
+            font-size: 16px;
+            border: 1px solid #000;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #FFF;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .back-button a:hover {
+            background-color: #eee;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="message-container" id="messageContainer">
+            <h2>User Messages</h2>
+            <!-- Messages will be dynamically added here -->
+        </div>
+
+        <div class="reply-form">
+            <textarea id="replyInput" placeholder="Type your reply here..."></textarea>
+            <button onclick="sendReply()">Send Reply</button>
+        </div>
+
+        <div class="back-button">
+            <a href="Material Page Admin.html" target="_blank">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        // Load messages when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadMessages();
+        });
+
+        function loadMessages() {
+            const messageContainer = document.getElementById('messageContainer');
+            const storedMessages = JSON.parse(localStorage.getItem('messages')) || [];
+            messageContainer.innerHTML = '';
+            storedMessages.forEach(message => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message';
+                messageDiv.innerHTML = `<p><strong>${message.user}:</strong> ${message.text}</p>`;
+                messageContainer.appendChild(messageDiv);
+            });
+        }
+
+        function sendReply() {
+            const replyInput = document.getElementById('replyInput');
+            const replyText = replyInput.value.trim();
+
+            if (replyText === '') {
+                alert('Please type a reply.');
+                return;
+            }
+
+            const storedMessages = JSON.parse(localStorage.getItem('messages')) || [];
+            const newMessage = { user: 'Admin', text: replyText };
+            storedMessages.push(newMessage);
+            localStorage.setItem('messages', JSON.stringify(storedMessages));
+            loadMessages();
+            replyInput.value = '';
+            alert('Reply sent!');
+        }
+    </script>
+</body>
+</html>

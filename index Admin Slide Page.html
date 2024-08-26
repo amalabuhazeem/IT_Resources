@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Slide Page</title>
+    <style>
+        body {
+            background-color: #3E5C76; /* اللون السابق */
+            font-family: Arial, sans-serif;
+            color: #FFF;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #A3D9A3; /* لون النص للمطابقة مع أقسام الألوان */
+            margin-bottom: 20px;
+        }
+        .admin-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px solid #FFF;
+            border-radius: 5px;
+            background-color: #A3D9A3; /* لون الخلفية */
+            color: #000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* ظل خفيف للصناديق */
+        }
+        .admin-section h2 {
+            margin-top: 0;
+            color: #3E5C76; /* اللون السابق للنصوص */
+        }
+        input[type="text"], input[type="number"], textarea {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #CCC;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #FFF;
+            color: #000;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #F1F1F1;
+        }
+        .back-button {
+            background-color: #FF6347; /* اللون السابق */
+            color: #FFF;
+            font-size: 16px;
+            padding: 10px 20px;
+            margin-top: 20px;
+        }
+        .back-button:hover {
+            background-color: #FF4500; /* اللون السابق */
+        }
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background-color: #A3D9A3; /* لون الخلفية */
+        }
+        table, th, td {
+            border: 1px solid #FFF; /* اللون السابق */
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50; /* اللون السابق */
+            color: #FFF;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #DCE4E6; /* لون خلفية الصفوف الزوجية */
+        }
+        tbody tr:hover {
+            background-color: #B8D1E0; /* لون خلفية الصفوف عند التمرير */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>WEB</h1>
+
+    <!-- Section to Add New Material -->
+    <div class="admin-section">
+        <h2>Add New Material</h2>
+        <input type="text" id="material-title" placeholder="Material Title" required>
+        <input type="text" id="material-content" placeholder="Material Content" required>
+        <button onclick="addMaterial()">Add Material</button>
+    </div>
+
+    <!-- Section to Add New Summary -->
+    <div class="admin-section">
+        <h2>Add New Summary</h2>
+        <input type="text" id="summary-title" placeholder="Summary Title" required>
+        <input type="text" id="summary-content" placeholder="Summary Content" required>
+        <button onclick="addSummary()">Add Summary</button>
+    </div>
+
+    <!-- Section to Add New Question -->
+    <div class="admin-section">
+        <h2>Add New Question</h2>
+        <input type="text" id="question-title" placeholder="Question Title" required>
+        <input type="text" id="question-content" placeholder="Question Content" required>
+        <button onclick="addQuestion()">Add Question</button>
+    </div>
+
+    <!-- Section to Update Existing Material -->
+    <div class="admin-section">
+        <h2>Update Existing Material</h2>
+        <form id="update-material-form" action="update_material.php" method="post">
+            <label for="material_id">Material ID:</label><br>
+            <input type="text" id="material_id" name="material_id" required><br>
+            <label for="new_content">New Content:</label><br>
+            <textarea id="new_content" name="new_content" rows="5" required></textarea><br>
+            <input type="submit" value="Update Material">
+        </form>
+    </div>
+
+    <!-- Section to Delete Material -->
+    <div class="admin-section">
+        <h2>Delete Material</h2>
+        <form id="delete-material-form" action="delete_material.php" method="post">
+            <label for="delete_id">Material ID:</label><br>
+            <input type="text" id="delete_id" name="delete_id" required><br>
+            <input type="submit" value="Delete Material">
+        </form>
+    </div>
+
+    <!-- Section to View Materials -->
+    <div class="admin-section">
+        <h2>View Materials</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                </tr>
+            </thead>
+            <tbody id="materials-table-body">
+                <!-- Data will be inserted here by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <button class="back-button" onclick="window.location.href='Article Content Admin Dashboard.html'">Back to Dashboard</button>
+</div>
+
+<script>
+    // Function to add material
+    function addMaterial() {
+        const title = document.getElementById('material-title').value;
+        const content = document.getElementById('material-content').value;
+        if (title && content) {
+            fetch('add_material.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title, content })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Material added successfully.');
+                    loadMaterials(); // Reload materials to show the new one
+                } else {
+                    alert('Failed to add material.');
+                }
+            })
+            .catch(error => console.error('Error adding material:', error));
+            
+            document.getElementById('material-title').value = '';
+            document.getElementById('material-content').value = '';
+        } else {
+            alert('Please fill in both fields.');
+        }
+    }
+
+    // Function to add summary
+    function addSummary() {
+        const title = document.getElementById('summary-title').value;
+        const content = document.getElementById('summary-content').value;
+        if (title && content) {
+            fetch('add_summary.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title, content })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Summary added successfully.');
+                    loadMaterials(); // Reload materials to show the new one
+                } else {
+                    alert('Failed to add summary.');
+                }
+            })
+            .catch(error => console.error('Error adding summary:', error));
+            
+            document.getElementById('summary-title').value = '';
+            document.getElementById('summary-content').value = '';
+        } else {
+            alert('Please fill in both fields.');
+        }
+    }
+
+    // Function to add question
+    function addQuestion() {
+        const title = document.getElementById('question-title').value;
+        const content = document.getElementById('question-content').value;
+        if (title && content) {
+            fetch('add_question.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title, content })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Question added successfully.');
+                    loadMaterials(); // Reload materials to show the new one
+                } else {
+                    alert('Failed to add question.');
+                }
+            })
+            .catch(error => console.error('Error adding question:', error));
+            
+            document.getElementById('question-title').value = '';
+            document.getElementById('question-content').value = '';
+        } else {
+            alert('Please fill in both fields.');
+        }
+    }
+
+    // Function to load materials
+    function loadMaterials() {
+        fetch('get_materials.php')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('materials-table-body');
+                tableBody.innerHTML = ''; // Clear existing rows
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${item.id}</td><td>${item.title}</td><td>${item.content}</td>`;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error loading materials:', error));
+    }
+
+    // Load materials when the page loads
+    window.onload = loadMaterials;
+</script>
+
+</body>
+</html>

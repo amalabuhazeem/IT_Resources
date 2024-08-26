@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slide Page</title>
+<style>
+  body {
+    background-color: #6C3EB7;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    position: relative;
+    margin-top: 50px;
+  }
+
+  .slide {
+    position: absolute;
+    width: 150px;
+    height: 50px;
+    border: 2px solid #6C3EB7;
+    background-color: #008CBA;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .slide:hover {
+    background-color: #006699;
+  }
+
+  .slide1 { top: 150px; left: 200px; }
+  .slide2 { top: 210px; left: 200px; }
+  .slide3 { top: 270px; left: 200px; }
+  .slide4 { top: 150px; left: 500px; }
+  .slide5 { top: 210px; left: 500px; }
+  .slide6 { top: 270px; left: 500px; }
+  .slide7 { top: 150px; left: 800px; }
+  .slide8 { top: 210px; left: 800px; }
+  .slide9 { top: 270px; left: 800px; }
+  .slide10 { top: 150px; left: 1100px; }
+  .slide11 { top: 210px; left: 1100px; }
+  .slide12 { top: 270px; left: 1100px; }
+  .slide13 { top: 400px; left: 200px; }
+  .slide14 { top: 460px; left: 200px; }
+  .slide15 { top: 520px; left: 200px; }
+  .slide16 { top: 400px; left: 500px; }
+  .slide17 { top: 460px; left: 500px; }
+  .slide18 { top: 520px; left: 500px; }
+
+  #image-chat {
+    position: absolute;
+    top: 600px;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #FFF;
+  }
+
+  #Start {
+    position: absolute;
+    top: 650px;
+    left: 110px;
+    width: 100px;
+    height: 100px;
+    background-color:#6C3EB7;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  #com {
+    color: black;
+    background-color: #FFF;
+    width: 150px;
+    height: 50px;
+    position: absolute;
+    top: 650px;
+    left: 250px;
+    font-size: 20px;
+    font-family: 'Comic Sans MS', cursive;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  h1 {
+    color: black;
+    background-color: #FFF;
+    width: 150px;
+    height: 50px;
+    position: absolute;
+    top: 5%;
+    left: 45%;
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  button {
+    color: black;
+    background-color: #FFF;
+    width: 75px;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+
+  button a {
+    text-decoration: none;
+    color: black;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Slides</h1>
+
+  <div class="slide slide1" data-url="chapter1.html"><a href="file:///C:/Users/User/AppData/Local/Microsoft/Windows/INetCache/IE/9ZFVU07B/Lecture1-Introduction%20To%20Internet%20Applications%20Programming%20(1)[1].pdf">Chapter (1)</a></div>
+  <div class="slide slide2" data-url="summary1.html">Summary (1)</div>
+  <div class="slide slide3" data-url="question1.html">Question (1)</div>
+
+  <div class="slide slide4" data-url="chapter2.html"><a href="file:///C:/Users/User/AppData/Local/Microsoft/Windows/INetCache/IE/54GHZJUF/Lecture2-%20HTML%20File%20Structure%20and%20Elements[1].pdf">Chapter (2)</a></div>
+  <div class="slide slide5" data-url="summary2.html">Summary (2)</div>
+  <div class="slide slide6" data-url="question2.html">Question (2)</div>
+
+  <div class="slide slide7" data-url="chapter3.html"><a href="file:///C:/Users/User/AppData/Local/Microsoft/Windows/INetCache/IE/9ZFVU07B/Lecture3-html%20entities[1].pdf">Chapter (3)</a></div>
+  <div class="slide slide8" data-url="summary3.html">Summary (3)</div>
+  <div class="slide slide9" data-url="question3.html">Question (3)</div>
+
+  <div class="slide slide10" data-url="chapter4.html"><a href="file:///C:/Users/User/AppData/Local/Microsoft/Windows/INetCache/IE/9ZFVU07B/Lecture4-HTML%20Lists[1].pdf">Chapter (4)</a></div>
+  <div class="slide slide11" data-url="summary4.html">Summary (4)</div>
+  <div class="slide slide12" data-url="question4.html">Question (4)</div>
+
+  <div class="slide slide13" data-url="chapter5.html"><a href="file:///C:/Users/User/AppData/Local/Microsoft/Windows/INetCache/IE/54GHZJUF/Lecture5-HTML%20Images[1].pdf">Chapter (5)</a></div>
+  <div class="slide slide14" data-url="summary5.html">Summary (5)</div>
+  <div class="slide slide15" data-url="question5.html">Question (5)</div>
+
+  <div class="slide slide16" data-url="chapter6.html"><a href="file:///C:/Users/User/AppData/Local/Microsoft/Windows/INetCache/IE/9ZFVU07B/Lecture6-%20HTML%20Links[1].pdf">Chapter (6)</a></div>
+  <div class="slide slide17" data-url="summary6.html">Summary (6)</div>
+  <div class="slide slide18" data-url="question6.html">Question (6)</div>
+
+  <img id="image-chat" src="image/CHAT.png" alt="Chat Image">
+  <div id="Start"><a href="Chat.html"> Start a chat..</a></div>
+  <div id="back"><a href="Material Page.html">Back</a></div>
+</div>
+
+<script>
+  // Function to handle slide clicks
+  function handleSlideClick(event) {
+    const url = event.target.getAttribute('data-url');
+    if (url) {
+      window.open(url, '_blank');
+    }
+  }
+
+  // Add click event listeners to slides
+  document.querySelectorAll('.slide').forEach(slide => {
+    slide.addEventListener('click', handleSlideClick);
+  });
+
+  // Handle button clicks
+  document.getElementById('com').addEventListener('click', function() {
+    window.open('comment.html', '_blank');
+  });
+
+  document.getElementById('Start').addEventListener('click', function() {
+    window.open('Chat.html', '_blank');
+  });
+
+  document.getElementById('back').addEventListener('click', function() {
+    window.open('Article content.html', '_blank');
+  });
+</script>
+
+</body>
+</html>

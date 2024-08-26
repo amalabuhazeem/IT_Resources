@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logout Page</title>
+<style>
+body {
+  background-color: #6C3EB7;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  text-align: center;
+  position: relative;
+}
+
+h1 {
+  color: white;
+  margin-bottom: 1em;
+  font-size: 75px;
+}
+
+pre {
+  color: white;
+  margin-bottom: 1em;
+  font-size: 40px;
+}
+
+button, #com, #Start, #close {
+  background-color: #fff;
+  border: none;
+  padding: 1em 2em;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-top: 1em;
+  border-radius: 5px;
+}
+
+button:hover, #com:hover, #close:hover {
+  background-color: #eee;
+}
+
+#com {
+  width: 150px;
+  height: 50px;
+  position: absolute;
+  top: 550px;
+  left: 250px;
+  font-size: 20px;
+  font-family: 'Comic Sans MS', cursive;
+  padding: 10px;
+}
+
+#Start {
+  position: absolute;
+  top: 565px;
+  left: 106px;
+  width: 100px;
+  height: 100px;
+  background-color: #6C3EB7;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+#close {
+  position: absolute;
+  top: 515px;
+  right: 100px;
+  width: 150px;
+  height: 75px;
+  font-size: 25px;
+  font-family: 'Arial Black', sans-serif;
+  padding: 10px;
+}
+
+#image-chat {
+  position: absolute;
+  top: 515px;
+  left: 0px;
+  width: 100px;
+  height: 100px;
+  border: 2px solid #fff;
+  border-radius: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: #333;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Thank you for using our website</h1>
+  <pre>Please rate the page's performance 
+  and leave your comment in the comments.</pre>
+  <pre>We were pleased to have you visit.</pre>
+  <button id="close">CLOSE</button>
+</div>
+
+<script>
+  // Handle button clicks
+  document.getElementById('com').addEventListener('click', function() {
+    window.open('comment material.html', '_blank');
+  });
+
+  document.getElementById('Start').addEventListener('click', function() {
+    window.open('Chat.html', '_blank');
+  });
+
+  document.getElementById('close').addEventListener('click', function() {
+    window.open('index.html', '_blank');
+  });
+</script>
+</body>
+</html>

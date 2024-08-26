@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard Material</title>
+    <style>
+        :root {
+            --primary-color: #3E5C76;
+            --secondary-color: #1c1c1c;
+            --highlight-color: #f1c40f;
+            --button-color: #007bff;
+            --button-hover-color: #0056b3;
+            --text-color-light: #ffffff;
+            --text-color-dark: #333;
+            --border-color: #444;
+            --accent-color: #e74c3c;
+        }
+
+        body {
+            background-color: var(--primary-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color-light);
+        }
+
+        .header {
+            background-color: var(--secondary-color);
+            color: var(--text-color-light);
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 2.5em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            margin-top: 100px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .image-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        #image-book {
+            width: 80%;
+            max-width: 600px;
+            height: auto;
+            border: 3px solid var(--primary-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .admin-section {
+            background-color: var(--secondary-color);
+            color: var(--text-color-light);
+            padding: 20px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .admin-button {
+            background-color: var(--button-color);
+            color: var(--text-color-light);
+            border: none;
+            border-radius: 5px;
+            width: calc(33.333% - 20px);
+            height: 50px;
+            margin: 10px;
+            font-size: 16px;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .admin-button:hover {
+            background-color: var(--button-hover-color);
+            transform: scale(1.05);
+        }
+
+        .manage-materials {
+            background-color: var(--secondary-color);
+            color: var(--text-color-light);
+            padding: 20px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .manage-materials input,
+        .manage-materials button {
+            margin: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .manage-materials input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            border: 2px solid var(--border-color);
+        }
+
+        .manage-materials button.add {
+            background-color: #28a745;
+            color: var(--text-color-light);
+        }
+
+        .manage-materials button.remove {
+            background-color: #dc3545;
+            color: var(--text-color-light);
+        }
+
+        #note, #com, #close {
+            background-color: var(--secondary-color);
+            color: var(--text-color-light);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+
+        #note:hover, #com:hover, #close:hover {
+            background-color: var(--accent-color);
+        }
+
+        #note a, #com a, #close a {
+            color: var(--text-color-light);
+            text-decoration: none;
+        }
+
+        .table-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--secondary-color);
+            color: var(--text-color-light);
+        }
+
+        tr:nth-child(even) {
+            background-color: #333;
+        }
+
+        tr:hover {
+            background-color: var(--highlight-color);
+            color: var(--text-color-dark);
+        }
+
+        .comments {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: var(--text-color-light);
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .comments img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .admin-button {
+                width: calc(50% - 20px);
+                font-size: 14px;
+            }
+
+            .manage-materials input[type="text"] {
+                width: 80%;
+            }
+
+            table {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        Admin Dashboard
+    </header>
+    
+    <div class="container">
+
+        <div class="admin-section">
+            <h2>Admin Controls</h2>
+            <a href="User Management.html" class="admin-button">User Management</a>
+            <a href="Site Settings.html" class="admin-button">Site Settings</a>
+            <a href="Reports.html" class="admin-button">Reports</a>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th><a href="Article content admin dashboard.html">WEB</a></th>
+                        <th><a href="Article Content Admin Dashboard2.html">JAVA</a></th>
+                    </tr>
+                    <tr>
+                        <th><a href="Article Content Admin Dashboard3.html">OBJECT</a></th>
+                        <th><a href="Article Content Admin Dashboard4.html">DATABASE</a></th>
+                    </tr>
+                    <tr>
+                        <th><a href="Article Content Admin Dashboard5.html">ANDROID</a></th>
+                        <th><a href="Article Content Admin Dashboard6.html">TOOLS</a></th>
+                    </tr>
+                    <tr>
+                        <th><a href="Article Content Admin Dashboard7.html">LAB OBJECT</a></th>
+                        <th><a href="Article Content Admin Dashboard8.html">LAB WEB</a></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+        <div class="manage-materials">
+            <h2>Manage Materials</h2>
+            <input type="text" id="materialInput" placeholder="Enter new material...">
+            <div>
+                <button class="add" onclick="addMaterial()">Add Material</button>
+                <button class="remove" onclick="removeMaterial()">Remove Material</button>
+            </div>
+        </div>
+
+        <button id="note"><a href="Admin Notes Page.html">Note</a></button>
+        
+        <button id="com"><a href="Admin Comment Section.html">Comment...</a></button>
+        
+        <button id="close"><a href="Admin Logout Page.html">CLOSE</a></button>
+    </div>
+    
+    <div class="comments">
+        <img id="image-chat" src="image/CHAT.png" alt="Chat Image">
+        <a href="Admin Chat.html">Start a chat...</a>
+    </div>
+    
+    <script>
+        function addMaterial() {
+            const input = document.getElementById('materialInput').value;
+            if (input.trim() !== '') {
+                alert(`Material "${input}" added.`);
+                // Add functionality to actually add the material
+            } else {
+                alert('Please enter a material name.');
+            }
+        }
+
+        function removeMaterial() {
+            const input = document.getElementById('materialInput').value;
+            if (input.trim() !== '') {
+                alert(`Material "${input}" removed.`);
+                // Add functionality to actually remove the material
+            } else {
+                alert('Please enter a material name.');
+            }
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        body {
+            background-color: #6C3EB7;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        pre {
+            position: absolute;
+            top: 10px;
+            left: 300px;
+            font-size: 70px;
+            color: white;
+        }
+        #loginForm, #signupForm {
+            position: absolute;
+            top: 350px;
+            right: 290px;
+            border-radius: 5px;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 500px;
+        }
+        label {
+            color: black;
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .styled-button {
+            background-color: #000;
+            border: none;
+            color: white;
+            padding: 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        .styled-button:hover {
+            background-color: #45a049;
+        }
+        #signupPrompt, #create {
+            text-align: center;
+            color: white;
+        }
+        #signupPrompt a, #create a {
+            color: #45a049;
+            text-decoration: none;
+        }
+        #signupPrompt a:hover, #create a:hover {
+            text-decoration: underline;
+        }
+        #image-container {
+            position: absolute;
+            top: 250px;
+            left: 150px;
+            width: 350px;
+            height: auto;
+            border: 2px solid #6C3EB7;
+        }
+        .note {
+            font-size: 12px;
+            color: #888;
+            margin-top: -5px;
+        }
+        #requestsContainer {
+            position: absolute;
+            top: 300px;
+            right: 200px;
+            border-radius: 5px;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 500px;
+            display: none;
+        }
+        .request {
+            margin-bottom: 15px;
+        }
+        .admin-actions {
+            margin-top: 10px;
+        }
+        .admin-actions button {
+            margin: 5px;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin: 10px 0;
+            display: none;
+        }
+        .error-message.visible {
+            display: block;
+        }
+        .success-message {
+            color: green;
+            font-size: 14px;
+            margin: 10px 0;
+            display: none;
+        }
+        .success-message.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <pre><b><i>Welcome 
+             Admin</i></b></pre>
+    <div id="loginSection">
+        <form id="loginForm">
+            <label for="adminUsername">Username</label>
+            <input type="text" id="adminUsername" name="username" required>
+            <div id="loginUsernameError" class="error-message"></div>
+            
+            <label for="adminPassword">Password</label>
+            <input type="password" id="adminPassword" name="password" required>
+            <div id="loginPasswordError" class="error-message"></div>
+            
+            <button type="submit" class="styled-button">Login</button>
+        </form>
+        <p id="create">You don't have an account? <a href="#" id="showSignup">Create a new account</a></p>
+        <p id="signupPrompt">Not an admin? <a href="userInterFaceIT.html">Login as User</a></p>
+    </div>
+    <img id="image-container" src="image/logoIT.jpg" alt="Admin Logo">
+    <div id="signupSection" style="display: none;">
+        <form id="signupForm">
+            <label for="newUsername">Username:</label>
+            <input type="text" id="newUsername" name="username" required>
+            <div id="signupUsernameError" class="error-message"></div>
+            
+            <label for="newEmail">Email:</label>
+            <input type="email" id="newEmail" name="email" required>
+            <div id="signupEmailError" class="error-message"></div>
+            
+            <label for="newPassword">Password:</label>
+            <input type="password" id="newPassword" name="password" required>
+            <div id="signupPasswordError" class="error-message"></div>
+            
+            <label for="experience">Experience (e.g., years or details):</label>
+            <input type="text" id="experience" name="experience" required>
+            <div id="signupExperienceError" class="error-message"></div>
+            
+            <label for="skills">Skills / Expertise:</label>
+            <input type="text" id="skills" name="skills" required>
+            <div id="signupSkillsError" class="error-message"></div>
+            
+            <button type="submit" class="styled-button">Create Account</button>
+        </form>
+        <p id="h">Already have an account? <a href="#" id="showLogin">Login</a></p>
+    </div>
+
+    <div id="requestsContainer"></div>
+
+    <script>
+        const adminCredentials = [
+            { email: 'asmakahwaldah@gmail.com', password: 'asma17$', username: 'Asma Wadi' },
+            { email: 'amalabuhazeem@icloud.com', password: 'amal16$', username: 'Amal Abu Hazeem' },
+            { email: 'Dana2021mm@gmail.com', password: 'dana98$', username: 'Dana Nasrallah' }
+        ];
+
+        let userRequests = JSON.parse(localStorage.getItem('userRequests')) || [];
+
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let valid = true;
+
+            const username = document.getElementById('newUsername').value;
+            const email = document.getElementById('newEmail').value;
+            const password = document.getElementById('newPassword').value;
+            const experience = document.getElementById('experience').value;
+            const skills = document.getElementById('skills').value;
+
+            // Clear previous errors
+            document.querySelectorAll('.error-message').forEach(el => el.classList.remove('visible'));
+
+            const usernameRegex = /^[A-Z][a-z]+ [A-Z][a-z]+$/;
+            if (!usernameRegex.test(username)) {
+                document.getElementById('signupUsernameError').textContent = 'Username should be in the format: FirstName LastName with each name capitalized.';
+                document.getElementById('signupUsernameError').classList.add('visible');
+                valid = false;
+            }
+
+            const emailRegex = /^[a-zA-Z]+.[a-zA-Z]+@gmail\.com$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('signupEmailError').textContent = 'Email must be in the format: firstname.lastname@gmail.com';
+                document.getElementById('signupEmailError').classList.add('visible');
+                valid = false;
+            }
+
+            const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+            if (!passwordRegex.test(password)) {
+                document.getElementById('signupPasswordError').textContent = 'Password must be at least 8 characters long, include letters, numbers, and a special character.';
+                document.getElementById('signupPasswordError').classList.add('visible');
+                valid = false;
+            }
+
+            if (!experience) {
+                document.getElementById('signupExperienceError').textContent = 'Please enter your experience.';
+                document.getElementById('signupExperienceError').classList.add('visible');
+                valid = false;
+            }
+
+            if (!skills) {
+                document.getElementById('signupSkillsError').textContent = 'Please enter your skills or expertise.';
+                document.getElementById('signupSkillsError').classList.add('visible');
+                valid = false;
+            }
+
+            if (valid) {
+                const newRequest = {
+                    username,
+                    email,
+                    password,
+                    experience,
+                    skills,
+                    approvals: 0,
+                    rejected: false
+                };
+
+                userRequests.push(newRequest);
+                localStorage.setItem('userRequests', JSON.stringify(userRequests));
+
+                const successMessage = document.createElement('div');
+                successMessage.className = 'success-message';
+                successMessage.textContent = 'Your request has been submitted and is awaiting admin approval.';
+                document.getElementById('signupForm').appendChild(successMessage);
+                successMessage.classList.add('visible');
+                document.getElementById('signupForm').reset();
+            }
+        });
+
+        function displayRequests() {
+            const container = document.getElementById('requestsContainer');
+            container.innerHTML = '';
+
+            userRequests.forEach((request, index) => {
+                if (!request.rejected) {
+                    const requestElement = document.createElement('div');
+                    requestElement.className = 'request';
+                    requestElement.innerHTML = `
+                        <h3>Request #${index + 1}</h3>
+                        <p><strong>Username:</strong> ${request.username}</p>
+                        <p><strong>Email:</strong> ${request.email}</p>
+                        <p><strong>Experience:</strong> ${request.experience}</p>
+                        <p><strong>Skills:</strong> ${request.skills}</p>
+                        <div class="admin-actions">
+                            <button class="styled-button approve" onclick="approveRequest(${index})">Approve</button>
+                            <button class="styled-button reject" onclick="rejectRequest(${index})">Reject</button>
+                        </div>
+                    `;
+                    container.appendChild(requestElement);
+                }
+            });
+        }
+
+        function approveRequest(index) {
+            userRequests[index].approvals += 1;
+            localStorage.setItem('userRequests', JSON.stringify(userRequests));
+            displayRequests();
+        }
+
+        function rejectRequest(index) {
+            userRequests[index].rejected = true;
+            localStorage.setItem('userRequests', JSON.stringify(userRequests));
+            displayRequests();
+        }
+
+        function checkAdmin(username, password) {
+            return adminCredentials.some(admin => admin.username === username && admin.password === password);
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+
+            if (checkAdmin(username, password)) {
+                alert('Login successful!');
+                window.location.href = 'Material page Admin.html'; // Redirect to the desired page
+            } else {
+                document.getElementById('loginUsernameError').textContent = 'Invalid username or password.';
+                document.getElementById('loginUsernameError').classList.add('visible');
+                document.getElementById('loginPasswordError').textContent = 'Please check your credentials and try again.';
+                document.getElementById('loginPasswordError').classList.add('visible');
+            }
+        });
+
+        document.getElementById('showSignup').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('signupSection').style.display = 'block';
+        });
+
+        document.getElementById('showLogin').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('signupSection').style.display = 'none';
+            document.getElementById('loginSection').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #6C3EB7;
+            margin: 0;
+            padding: 0;
+        }
+        .comment-section {
+            width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #C285FF;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .comment-form {
+            margin-bottom: 20px;
+        }
+        .comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+        .comment-form button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #1877F2;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .comment-form button:hover {
+            background-color: #155ab5;
+        }
+        .comment {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .comment .author {
+            font-weight: bold;
+        }
+        .comment .text {
+            margin-top: 5px;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 10px 15px;
+            border: none;
+            background-color: #1877F2;
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .back-button:hover {
+            background-color: #155ab5;
+        }
+    </style>
+</head>
+<body>
+    <div class="comment-section">
+        <button class="back-button" onclick="goBack()">Back to Home</button>
+        <div class="comment-form">
+            <textarea id="commentInput" placeholder="Write a comment..."></textarea>
+            <button onclick="addComment()">Post Comment</button>
+        </div>
+        <div id="commentsContainer">
+            <!-- Comments will be added here dynamically -->
+        </div>
+    </div>
+
+    <script>
+        // Function to add a comment
+        function addComment() {
+            const commentInput = document.getElementById('commentInput');
+            const commentsContainer = document.getElementById('commentsContainer');
+
+            // Get the comment text
+            const commentText = commentInput.value.trim();
+            if (commentText === '') {
+                alert('Please enter a comment.');
+                return;
+            }
+
+            // Create a new comment element
+            const commentDiv = document.createElement('div');
+            commentDiv.className = 'comment';
+
+            // Add content to the comment
+            commentDiv.innerHTML = `
+                <div class="author">Anonymous</div>
+                <div class="text">${escapeHtml(commentText)}</div>
+            `;
+
+            // Append the comment to the container
+            commentsContainer.appendChild(commentDiv);
+
+            // Save comments to localStorage
+            saveComments();
+
+            // Clear the input field
+            commentInput.value = '';
+        }
+
+        // Function to escape HTML characters
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Function to save comments to localStorage
+        function saveComments() {
+            const commentsContainer = document.getElementById('commentsContainer');
+            localStorage.setItem('comments', commentsContainer.innerHTML);
+        }
+
+        // Function to load comments from localStorage
+        function loadComments() {
+            const savedComments = localStorage.getItem('comments');
+            if (savedComments) {
+                document.getElementById('commentsContainer').innerHTML = savedComments;
+            }
+        }
+
+        // Function to navigate back to home
+        function goBack() {
+            window.location.href = 'Material Page.html';
+        }
+
+        // Load comments when the page is loaded
+        window.onload = loadComments;
+    </script>
+</body>
+</html>

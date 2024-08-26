@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>References7</title>
+    <style>
+        body {
+            background-color: #6C3EB7;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: #FFF;
+            margin-bottom: 20px;
+            position: absolute;
+            top: 3%;
+            left: 40%;
+            font-size: 45px;
+            background-color: #61ADF3;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            position: absolute;
+            top: 20%;
+            left: 25%;
+            color: #FFF;
+            
+        }
+
+        li {
+            margin-bottom: 40px;
+            background-color:white;
+        }
+
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+        }
+
+        .button:hover {
+            background-color: #0069d9;
+        }
+
+        .star-rating {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .star {
+            color: #ffc107;
+            font-size: 24px;
+            margin-right: 5px;
+        }
+
+        #openModalBtn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+            position: absolute;
+            top: 620px;
+            left: 7.5%;
+        }
+
+        #openModalBtn:hover {
+            background-color: #0069d9;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 500px;
+            position: relative;
+        }
+
+        /* Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
+        .star-rating {
+            display: flex;
+            direction: row-reverse;
+            font-size: 2em;
+            unicode-bidi: bidi-override;
+            cursor: pointer;
+        }
+        .star-rating input {
+            display: none;
+        }
+        .star-rating label {
+            color: #ddd;
+            margin: 0;
+            padding: 0;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .star-rating input:checked ~ label {
+            color: #f5c518;
+        }
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #f5c518;
+        }
+
+        #ratingResult {
+            font-size: 18px;
+            margin-top: 20px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>References</h1>
+        <ul>
+            <li><a href="#" onclick="navigateTo('https://www.example.com')"># link....</a></li>
+            <li><a href="#" onclick="navigateTo('https://www.example.com/book')">- link book</a></li>
+            <li><a href="#" onclick="navigateTo('https://www.example.com/video')">- link video</a></li>
+            <li><a href="#" onclick="navigateTo('https://www.example.com/research')">- link research</a></li>
+            <li><a href="#" onclick="navigateTo('https://www.example.com/information')">- link for any Information</a></li>
+        </ul>
+        <button class="button" onclick="navigateTo('Article content(7).html')">Back</button>
+       
+
+
+    <!-- Trigger/Open The Modal -->
+    <button id="openModalBtn">Evaluate now</button>
+
+    <!-- The Modal -->
+    <div id="ratingModal" class="modal">
+        <!-- Modal Content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1>Star rating</h1>
+            <div class="star-rating">
+                <input type="radio" id="star5" name="rating" value="5"><label for="star5">☆</label>
+                <input type="radio" id="star4" name="rating" value="4"><label for="star4">☆</label>
+                <input type="radio" id="star3" name="rating" value="3"><label for="star3">☆</label>
+                <input type="radio" id="star2" name="rating" value="2"><label for="star2">☆</label>
+                <input type="radio" id="star1" name="rating" value="1"><label for="star1">☆</label>
+            </div>
+            <div id="ratingResult">Please select a rating.</div>
+        </div>
+    </div>
+
+    <script>
+        // Function to navigate to a URL
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+
+        // Get the modal
+        const modal = document.getElementById("ratingModal");
+
+        // Get the button that opens the modal
+        const btn = document.getElementById("openModalBtn");
+
+        // Get the <span> element that closes the modal
+        const span = document.querySelector(".close");
+
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Add event listeners to each star
+        document.querySelectorAll('.star-rating input').forEach(star => {
+            star.addEventListener('change', () => {
+                // Get the value of the selected star
+                const rating = document.querySelector('input[name="rating"]:checked')?.value;
+                // Update the rating result display
+                document.getElementById('ratingResult').textContent = `تم اختيار تقييم: ${rating} نجوم`;
+            });
+        });
+    </script>
+</body>
+</html>
